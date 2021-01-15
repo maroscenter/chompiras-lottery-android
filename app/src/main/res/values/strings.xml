@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Billetero</string>
+
+    <string name="text_home">Inicio</string>
+    <string name="text_list">Lista</string>
+    <string name="text_total">Cuenta</string>
+
+    <string name="symbol_dollar">$</string>
+
+    <string name="action_undo">Deshacer</string>
+    <string name="action_send_list">Enviar</string>
+    <string name="action_view">Visualizar</string>
+</resources>
