@@ -2,13 +2,13 @@ package com.youtube.sorcjc.billetero.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,16 +44,12 @@ public class MainActivity extends AppCompatActivity {
                         FragmentManager fm = getSupportFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
 
-                        switch (item.getItemId()) {
-                            case R.id.action_home:
-                                fragment = new HomeFragment();
-                                break;
-                            case R.id.action_list:
-                                fragment = new ListFragment();
-                                break;
-                            case R.id.action_total:
+                        if (item.getItemId() == R.id.action_home) {
+                            fragment = new HomeFragment();
+                        } else if (item.getItemId() == R.id.action_list) {
+                            fragment = new ListFragment();
+                        } else if (item.getItemId() == R.id.action_total) {
                                 fragment = new TotalFragment();
-                                break;
                         }
 
                         // replace fragment content
@@ -78,9 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.reset:
-                Global.showConfirmationDialog(
+        if (item.getItemId() == R.id.reset) {
+            Global.showConfirmationDialog(
                     this,
                     "Confirmar acción",
                     "¿Realmente desea resetear su lista? Todos los tiempos vendidos serán modificados por cero.",
@@ -90,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
                             resetList();
                         }
                     }
-                );
+            );
 
-                return true;
+            return true;
 
-            case R.id.logout:
-                Global.showConfirmationDialog(
+        } else if (item.getItemId() == R.id.logout) {
+            Global.showConfirmationDialog(
                     this,
                     "Confirmar acción",
                     "¿Desea cerrar sesión?",
@@ -105,11 +100,12 @@ public class MainActivity extends AppCompatActivity {
                             performLogout();
                         }
                     }
-                );
-                return true;
+            );
 
-            default:
-                return super.onOptionsItemSelected(item);
+            return true;
+
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

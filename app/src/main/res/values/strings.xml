@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Billetero</string>
+    <string name="app_name">MRM Lottery</string>
 
     <string name="text_home">Inicio</string>
     <string name="text_list">Lista</string>
@@ -10,4 +10,14 @@
     <string name="action_undo">Deshacer</string>
     <string name="action_send_list">Enviar</string>
     <string name="action_view">Visualizar</string>
+
+    <string name="btn_add_detail">Agregar Jugada</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_clear">Limpiar</string>
+
+    <string name="detail_header_type">Jugada</string>
+    <string name="detail_header_number">Número</string>
+    <string name="detail_header_points">Puntos</string>
+
+
 </resources>

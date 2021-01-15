@@ -24,8 +24,7 @@ public class MyApiAdapter {
         // String baseUrl = "http://192.168.12.225:8000/api/";
 
         // or your production server ip
-        // String baseUrl = "http://mrm-lotery.com/api/";
-        String baseUrl = "http://trebolchichigalpa.com/api/";
+        String baseUrl = "http://mrm-lotery.com/api/";
 
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()
