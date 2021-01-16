@@ -18,6 +18,7 @@
     <string name="detail_header_type">Jugada</string>
     <string name="detail_header_number">Número</string>
     <string name="detail_header_points">Puntos</string>
+    <string name="btn_select_lotteries">Seleccionar loterías</string>
 
 
 </resources>

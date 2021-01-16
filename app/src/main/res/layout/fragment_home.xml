@@ -12,6 +12,13 @@
         android:orientation="vertical"
         android:padding="6dp">
 
+        <Button
+            android:id="@+id/btnSelectLotteries"
+            android:text="@string/btn_select_lotteries"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
@@ -35,7 +42,7 @@
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerType"
                     android:layout_width="100dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -71,7 +78,7 @@
                 <EditText
                     android:id="@+id/etTicket"
                     android:layout_width="100dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -106,7 +113,7 @@
                 <EditText
                     android:id="@+id/etQuantity"
                     android:layout_width="100dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -135,6 +142,7 @@
         android:layout_height="1dp" />
 
     <LinearLayout
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -185,8 +193,8 @@
 
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_margin="16dp"
             android:background="@drawable/round_button"
@@ -196,8 +204,8 @@
 
         <Button
             android:id="@+id/btnClear"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_margin="16dp"
             android:background="@drawable/round_button"

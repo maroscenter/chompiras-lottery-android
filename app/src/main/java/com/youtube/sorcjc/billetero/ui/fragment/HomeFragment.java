@@ -1,8 +1,11 @@
 package com.youtube.sorcjc.billetero.ui.fragment;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +36,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
 
+    final String[] items = {"Lotería 1", "Lotería 2", "Lotería 3", "Lotería 4", "Lotería 5"};
+    final ArrayList<Integer> itemsSelected = new ArrayList<>();
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -53,10 +59,49 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ticketPlays.add(new TicketPlay(12, 4, "Quiniela"));
         ticketPlays.add(new TicketPlay(23, 2, "Pale"));
 
+        Button btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
+        btnSelectLotteries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createCheckboxesDialog();
+            }
+        });
+
         setupRecyclerView(view);
         populateSpinnerTypes(view);
 
         return  view;
+    }
+
+    private void createCheckboxesDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Loterías donde se comprarán los tickets:");
+
+        builder.setMultiChoiceItems(items, null,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int selectedItemId,
+                                        boolean isSelected) {
+                        if (isSelected) {
+
+                            itemsSelected.add(selectedItemId);
+                        } else if (itemsSelected.contains(selectedItemId)) {
+
+                            itemsSelected.remove(Integer.valueOf(selectedItemId));
+                        }
+                    }
+                })
+                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // OK button clicked
+                    }
+                })
+                .setNegativeButton("Cancelar", null);
+
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     private void setupRecyclerView(View view) {
