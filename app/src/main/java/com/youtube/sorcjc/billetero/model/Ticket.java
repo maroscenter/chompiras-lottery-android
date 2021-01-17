@@ -2,37 +2,37 @@ package com.youtube.sorcjc.billetero.model;
 
 public class Ticket {
 
-    private int ticketNumber;
-    private int totalSold;
-    private int surplus;
+    private int id;
+    private String createdAt;
+    private String lotteries;
 
-    public Ticket(int ticketNumber, int totalSold, int surplus) {
-        this.ticketNumber = ticketNumber;
-        this.totalSold = totalSold;
-        this.surplus = surplus;
+    public Ticket(int ticketNumber, String createdAt, String lotteries) {
+        this.id = ticketNumber;
+        this.setCreatedAt(createdAt);
+        this.setLotteries(lotteries);
     }
 
-    public int getTicketNumber() {
-        return ticketNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setTicketNumber(int ticketNumber) {
-        this.ticketNumber = ticketNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getTotalSold() {
-        return totalSold;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setTotalSold(int totalSold) {
-        this.totalSold = totalSold;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public int getSurplus() {
-        return surplus;
+    public String getLotteries() {
+        return lotteries;
     }
 
-    public void setSurplus(int surplus) {
-        this.surplus = surplus;
+    public void setLotteries(String lotteries) {
+        this.lotteries = lotteries;
     }
 }

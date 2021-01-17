@@ -1,16 +1,16 @@
 package com.youtube.sorcjc.billetero.ui.adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
-import com.youtube.sorcjc.billetero.io.TicketPreferences;
 import com.youtube.sorcjc.billetero.model.Ticket;
 
 import java.util.ArrayList;
@@ -19,58 +19,30 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     private ArrayList<Ticket> dataSet;
 
     // Define references to the views for each data item
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView tvTicketNumber, tvQuantity, tvSurplus;
+        public TextView tvId, tvCreatedAt, tvLotteries;
+        public Button btnDetails;
 
-        private Context context;
-        private ViewGroup viewGroup;
+        private final Context context;
 
         public ViewHolder(View v) {
             super(v);
 
-            viewGroup = (ViewGroup) v;
             context = v.getContext();
 
-            tvTicketNumber = (TextView) v.findViewById(R.id.tvTicketNumber);
-            tvQuantity = (TextView) v.findViewById(R.id.tvQuantity);
-            tvSurplus = (TextView) v.findViewById(R.id.tvSurplus);
+            tvId = v.findViewById(R.id.tvTicketId);
+            tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
+            tvLotteries = v.findViewById(R.id.tvLotteries);
+            btnDetails = v.findViewById(R.id.btnDetails);
 
-            tvQuantity.setOnLongClickListener(this);
+            btnDetails.setOnClickListener(this);
         }
 
         @Override
-        public boolean onLongClick(View view) {
-            if (view.getId() == R.id.tvQuantity) {
-                final String title = "Cifra " + tvTicketNumber.getText();
-                final String initialValue = tvQuantity.getText().toString();
-                Global.showInputDialog(title, initialValue, context, viewGroup, new PositiveListenerForDialog());
-            }
-            return false;
-        }
-
-        class PositiveListenerForDialog implements TicketOnNewQuantityListener {
-            @Override
-            public void updateQuantity(final String quantityString) {
-                if (quantityString.isEmpty()) {
-                    Global.showMessageDialog(context, "No se pudo guardar", "No se ingresó ninguna cantidad.");
-                    return;
-                }
-
-                final int quantity = Integer.parseInt(quantityString);
-                final int ticketNumber = Integer.parseInt( tvTicketNumber.getText().toString() );
-
-                TicketPreferences ticketPreferences = new TicketPreferences((Activity) context);
-                final int limitTimes = ticketPreferences.getLimitTimes();
-                int surplus = 0;
-                if (quantity > limitTimes) {
-                    surplus = quantity - limitTimes;
-                }
-
-                ticketPreferences.setTotalSold(ticketNumber, quantity);
-
-                tvQuantity.setText(quantityString);
-                tvSurplus.setText(String.valueOf(surplus));
+        public void onClick(View view) {
+            if (view.getId() == R.id.btnDetails) {
+                Toast.makeText(context, "Development", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -99,15 +71,16 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         return pre + i;
     }
 
+    @NonNull
     @Override
     public TicketAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
 
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.table_row, parent, false);
-
+                .inflate(R.layout.item_ticket, parent, false);
 
         // set the view's size, margins, padding and layout parameters
+        // ...
 
         return new ViewHolder(v);
     }
@@ -119,9 +92,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         Ticket ticket = dataSet.get(position);
 
         // replace the contents of the view with that element
-        holder.tvTicketNumber.setText(twoDigits(ticket.getTicketNumber()));
-        holder.tvQuantity.setText(String.valueOf(ticket.getTotalSold()));
-        holder.tvSurplus.setText(String.valueOf(ticket.getSurplus()));
+        holder.tvId.setText(twoDigits(ticket.getId()));
+        holder.tvCreatedAt.setText(ticket.getCreatedAt());
+        holder.tvLotteries.setText(ticket.getLotteries());
     }
 
     @Override

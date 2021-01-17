@@ -24,8 +24,6 @@ public class TicketPreferences {
 
         for (int i=0; i<=99; ++i) {
             editor.putInt(String.valueOf(i), 0);
-            if (ticketAdapter != null)
-                ticketAdapter.updateItem(new Ticket(i, 0, 0), i);
         }
 
         editor.apply();
@@ -58,13 +56,7 @@ public class TicketPreferences {
     }
 
     public Ticket getTicketAt(int position) {
-        final int totalSold = getTotalSold(position);
-        int surplus = 0;
-
-        if (position>=1 && position<=31 && totalSold>getLimitTimes())
-            surplus = totalSold - getLimitTimes();
-
-        return new Ticket(position, totalSold, surplus);
+        return new Ticket(1, "2020-01-05", "LotA, LotB");
     }
 
     public int getLimitTimes() {

@@ -2,8 +2,9 @@
     <string name="app_name">MRM Lottery</string>
 
     <string name="text_home">Inicio</string>
-    <string name="text_list">Lista</string>
-    <string name="text_total">Cuenta</string>
+    <string name="text_tickets">Vendidos</string>
+    <string name="text_winners">Ganadores</string>
+    <string name="text_earnings">Ingresos</string>
 
     <string name="symbol_dollar">$</string>
 
@@ -19,6 +20,6 @@
     <string name="detail_header_number">Número</string>
     <string name="detail_header_points">Puntos</string>
     <string name="btn_select_lotteries">Seleccionar loterías</string>
-
+    <string name="btn_see_details">Ver</string>
 
 </resources>

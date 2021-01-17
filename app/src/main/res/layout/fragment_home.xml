@@ -5,6 +5,14 @@
     android:orientation="vertical"
     tools:context="com.youtube.sorcjc.billetero.ui.fragment.HomeFragment">
 
+    <TextView
+        android:text="Registrar nuevo ticket"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +24,7 @@
             android:id="@+id/btnSelectLotteries"
             android:text="@string/btn_select_lotteries"
             android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <LinearLayout
@@ -32,7 +40,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/detail_header_type"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -41,8 +49,8 @@
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinnerType"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -68,7 +76,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/detail_header_number"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -77,8 +85,8 @@
 
                 <EditText
                     android:id="@+id/etTicket"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -98,12 +106,12 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/detail_header_points"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -112,8 +120,8 @@
 
                 <EditText
                     android:id="@+id/etQuantity"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
@@ -130,14 +138,15 @@
 
     <Button
         android:text="@string/btn_add_detail"
+        android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <View
         android:background="@color/colorAccent"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
 

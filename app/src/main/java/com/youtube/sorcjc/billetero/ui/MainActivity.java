@@ -15,10 +15,10 @@ import android.view.MenuItem;
 
 import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
-import com.youtube.sorcjc.billetero.io.TicketPreferences;
 import com.youtube.sorcjc.billetero.ui.fragment.HomeFragment;
-import com.youtube.sorcjc.billetero.ui.fragment.ListFragment;
+import com.youtube.sorcjc.billetero.ui.fragment.SoldTicketsFragment;
 import com.youtube.sorcjc.billetero.ui.fragment.TotalFragment;
+import com.youtube.sorcjc.billetero.ui.fragment.WinnersFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
                         if (item.getItemId() == R.id.action_home) {
                             fragment = new HomeFragment();
-                        } else if (item.getItemId() == R.id.action_list) {
-                            fragment = new ListFragment();
+                        } else if (item.getItemId() == R.id.action_tickets) {
+                            fragment = new SoldTicketsFragment();
+                        } else if (item.getItemId() == R.id.action_winners) {
+                            fragment = new WinnersFragment();
                         } else if (item.getItemId() == R.id.action_total) {
-                                fragment = new TotalFragment();
+                            fragment = new TotalFragment();
                         }
 
                         // replace fragment content
@@ -110,12 +112,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetList() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentFragment);
-        if (fragment instanceof ListFragment) {
-            ((ListFragment) fragment).clearListAndRecyclerView();
-        } else {
-            new TicketPreferences(this).clearList(null); // not necessary to update the adapter
-        }
     }
 
     private void performLogout() {

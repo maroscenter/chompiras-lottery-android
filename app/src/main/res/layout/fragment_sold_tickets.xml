@@ -3,7 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.youtube.sorcjc.billetero.ui.fragment.ListFragment">
+    tools:context="com.youtube.sorcjc.billetero.ui.fragment.SoldTicketsFragment">
+
+    <TextView
+        android:text="Tickets vendidos"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +20,26 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Cifras" />
+            android:text="ID" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Fecha y hora" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Loterías" />
 
         <TextView
             android:layout_width="0dp"
@@ -24,15 +47,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Total tiempos" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Excedente" />
+            android:text="Detalles" />
     </LinearLayout>
 
     <FrameLayout
@@ -61,39 +76,4 @@
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/layoutButtons"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/ibUndo"
-            android:layout_width="50dp"
-            android:contentDescription="@string/action_undo"
-            android:layout_height="50dp"
-            android:background="@drawable/round_button"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/ic_action_undo" />
-
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/round_button"
-            android:gravity="center"
-            android:text="@string/action_send_list"
-            android:textColor="#fff" />
-
-        <ImageButton
-            android:id="@+id/ibViewList"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_action_zoom"
-            android:background="@drawable/round_button"
-            android:gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/action_view" />
-    </LinearLayout>
 </LinearLayout>

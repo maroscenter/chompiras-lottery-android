@@ -2,9 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.youtube.sorcjc.billetero.ui.fragment.TotalFragment">
+
+    <TextView
+        android:text="Ganancias y comisiones"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_height="wrap_content" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

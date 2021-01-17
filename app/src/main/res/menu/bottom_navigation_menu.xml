@@ -4,19 +4,26 @@
     <item
         android:id="@+id/action_home"
         android:enabled="true"
-        android:icon="@drawable/ic_action_home"
+        android:icon="@drawable/ic_home"
         android:title="@string/text_home"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_list"
+        android:id="@+id/action_tickets"
         android:enabled="true"
-        android:icon="@drawable/ic_action_list"
-        android:title="@string/text_list"
+        android:icon="@drawable/ic_list"
+        android:title="@string/text_tickets"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_winners"
+        android:enabled="true"
+        android:icon="@drawable/ic_happy_face"
+        android:title="@string/text_winners"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_total"
         android:enabled="true"
-        android:icon="@drawable/ic_action_total"
-        android:title="@string/text_total"
+        android:icon="@drawable/ic_money"
+        android:title="@string/text_earnings"
         app:showAsAction="ifRoom" />
 </menu>
