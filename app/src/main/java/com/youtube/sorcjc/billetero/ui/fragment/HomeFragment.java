@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private Button btnSave;
+    private ImageButton btnSave;
     private EditText etTicket, etQuantity;
 
     private RecyclerView mRecyclerView;
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ticketPlays.add(new TicketPlay(12, 4, "Quiniela"));
         ticketPlays.add(new TicketPlay(23, 2, "Pale"));
 
-        Button btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
+        ImageButton btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
         btnSelectLotteries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,11 +123,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         types.add("Pale");
         types.add("Tripleta");
 
-        ArrayAdapter<String> typesArrayAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_type, types);
+        ArrayAdapter<String> typesArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, types);
+        typesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mSpinnerTypes.setAdapter(
-            typesArrayAdapter
-        );
+        mSpinnerTypes.setAdapter(typesArrayAdapter);
+        mSpinnerTypes.setSelection(0);
     }
 
     @Override

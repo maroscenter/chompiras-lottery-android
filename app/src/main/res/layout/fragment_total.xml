@@ -72,7 +72,7 @@
                 android:background="@drawable/round_button"
                 android:contentDescription="Guardar"
                 android:gravity="center_vertical|center_horizontal"
-                android:src="@drawable/ic_action_save"
+                android:src="@drawable/ic_save"
                 android:textColor="#fff" />
         </LinearLayout>
 

@@ -21,5 +21,6 @@
     <string name="detail_header_points">Puntos</string>
     <string name="btn_select_lotteries">Seleccionar loterías</string>
     <string name="btn_see_details">Ver</string>
+    <string name="btn_register_ticket">Vender</string>
 
 </resources>
