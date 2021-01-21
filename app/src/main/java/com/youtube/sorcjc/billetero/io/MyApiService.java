@@ -32,10 +32,10 @@ public interface MyApiService {
             @Field("password") String password
     );
 
-    @FormUrlEncoded
+    @Headers("Accept: application/json")
     @POST("tickets")
     Call<SimpleResponse> storeTicket(
-            @Field("lottery_ids[]") ArrayList<Integer> lotteryIds,
+            @Header("Authorization") String authHeader,
             @Body TicketBody ticketBody
     );
 

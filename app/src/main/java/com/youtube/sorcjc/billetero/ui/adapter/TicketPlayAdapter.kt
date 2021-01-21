@@ -23,6 +23,10 @@ class TicketPlayAdapter (private var ticketPlays: ArrayList<TicketPlay> = ArrayL
         notifyDataSetChanged();
     }
 
+    fun getPlays(): ArrayList<TicketPlay> {
+        return ticketPlays;
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(ticketPlay: TicketPlay) = with (itemView) {

@@ -1,24 +1,27 @@
 package com.youtube.sorcjc.billetero.io.response;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SimpleResponse {
 
-    private String message;
-    private boolean error;
+    @SerializedName("error_message")
+    private String errorMessage;
+    private boolean success;
 
-    public String getMessage() {
-        return message;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public boolean isError() {
-        return error;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
 }

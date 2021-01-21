@@ -24,12 +24,15 @@ import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
 import com.youtube.sorcjc.billetero.io.MyApiAdapter;
 import com.youtube.sorcjc.billetero.io.TicketPreferences;
+import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.model.Lottery;
+import com.youtube.sorcjc.billetero.model.TicketBody;
 import com.youtube.sorcjc.billetero.model.TicketPlay;
 import com.youtube.sorcjc.billetero.model.User;
 import com.youtube.sorcjc.billetero.ui.adapter.TicketPlayAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -233,9 +236,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void save() {
-        final String ticketNumberString = etNumber.getText().toString();
-        final String quantityString = etPoints.getText().toString();
-
+        /*
         if (ticketNumberString.isEmpty() || quantityString.isEmpty()) {
             Global.showMessageDialog(getContext(), "No se pudo guardar", "Asegúrese de ingresar un valor para cada campo.");
             return;
@@ -253,15 +254,52 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Global.showMessageDialog(getContext(), "No se pudo guardar", "Ingrese una cantidad de tiempos válida.");
             return;
         }
+        */
 
-        TicketPreferences ticketPreferences = new TicketPreferences(getActivity());
-        ticketPreferences.addTotalSold(ticketNumber, quantity);
-        ticketPreferences.setLastOperation(ticketNumber, quantity);
+        final String authHeader = User.getAuthHeader(getContext());
+        final TicketBody ticketBody = new TicketBody(getLotteryIdsAsArray(), mAdapter.getPlays());
 
-        final String message = "Se registraron " + quantityString + " tiempos más para la cifra " + ticketNumberString + ".";
-        Global.showMessageDialog(getContext(), "Registro exitoso", message);
+        MyApiAdapter.getApiService()
+                .storeTicket(authHeader, ticketBody)
+                .enqueue(new Callback<SimpleResponse>() {
 
-        etNumber.setText("");
-        etPoints.setText("");
+            @Override
+            public void onResponse(@NonNull Call<SimpleResponse> call, @NonNull Response<SimpleResponse> response) {
+                if (response.isSuccessful()) {
+                    SimpleResponse simpleResponse = response.body();
+                    if (simpleResponse.isSuccess()) {
+                        showSuccessfulTicketDialog();
+                    } else {
+                        showErrorTicketDialog(simpleResponse.getErrorMessage());
+                    }
+                } else {
+                    showErrorTicketDialog(response.raw().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SimpleResponse> call, @NonNull Throwable t) {
+                showErrorTicketDialog(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    private int[] getLotteryIdsAsArray() {
+        final int[] lotteryIds = new int[mSelectedLotteries.size()];
+
+        for (int i=0; i<mSelectedLotteries.size(); ++i) {
+            final int position = mSelectedLotteries.get(i);
+            lotteryIds[i] = mLotteries.get(position).getId();
+        }
+
+        return lotteryIds;
+    }
+
+    private void showSuccessfulTicketDialog() {
+        Global.showMessageDialog(getContext(), "Operación exitosa", "El ticket se ha registrado correctamente.");
+    }
+
+    private void showErrorTicketDialog(String errorMessage) {
+        Global.showMessageDialog(getContext(), "Operación rechazada", errorMessage);
     }
 }
