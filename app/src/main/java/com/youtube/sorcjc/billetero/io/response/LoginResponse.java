@@ -1,33 +1,17 @@
 package com.youtube.sorcjc.billetero.io.response;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResponse {
 
-    private String name;
-    private int user_id;
+    @SerializedName("access_token")
+    private String accessToken;
 
-    private boolean error;
-
-    public boolean isError() {
-        return error;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getUserId() {
-        return user_id;
-    }
-
-    public void setUserId(int user_id) {
-        this.user_id = user_id;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

@@ -13,6 +13,16 @@ import kotlinx.android.synthetic.main.item_ticket_play.view.*
 class TicketPlayAdapter (private var ticketPlays: ArrayList<TicketPlay> = ArrayList())
     : RecyclerView.Adapter<TicketPlayAdapter.ViewHolder>() {
 
+    fun addPlay(ticketPlay: TicketPlay) {
+        ticketPlays.add(ticketPlay)
+        notifyItemInserted(ticketPlays.size - 1)
+    }
+
+    fun clear() {
+        ticketPlays.clear();
+        notifyDataSetChanged();
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(ticketPlay: TicketPlay) = with (itemView) {

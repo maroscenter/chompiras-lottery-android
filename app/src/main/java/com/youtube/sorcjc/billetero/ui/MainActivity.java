@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performLogout() {
-        Global.saveStringGlobalPreference(this, "name", "");
-        Global.saveGlobalPreference(this, "user_id", 0);
+        Global.saveStringPref(this, "name", "");
+        Global.saveIntPref(this, "user_id", 0);
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

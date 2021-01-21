@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -36,7 +35,7 @@ public class TotalFragment extends Fragment implements View.OnClickListener {
         TicketPreferences ticketPreferences = new TicketPreferences(getActivity());
         etTimesLimit.setText(String.valueOf(ticketPreferences.getLimitTimes()));
 
-        ImageButton btnSave = view.findViewById(R.id.btnSave);
+        ImageButton btnSave = view.findViewById(R.id.ibSave);
         btnSave.setOnClickListener(this);
 
         // edit text references
@@ -58,7 +57,7 @@ public class TotalFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnSave) {
+        if (view.getId() == R.id.ibSave) {
 
 
             final String timesLimitString = etTimesLimit.getText().toString();

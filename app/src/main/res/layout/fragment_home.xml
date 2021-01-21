@@ -6,13 +6,12 @@
     tools:context="com.youtube.sorcjc.billetero.ui.fragment.HomeFragment">
 
     <TextView
-        android:text="Registrar nuevo ticket"
+        android:text="@string/fragment_home_title"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginBottom="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 
     <LinearLayout
         android:gravity="center"
@@ -21,8 +20,10 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tvSelectedLotteries"
             android:gravity="center"
-            android:text="Loterías seleccionadas:\nLotA, LotB, LotC"
+            android:text="@string/no_selected_lotteries"
+            tools:text="Loterías seleccionadas:\nLotA, LotB, LotC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -94,7 +95,7 @@
                 android:text="@string/detail_header_number" />
 
             <EditText
-                android:id="@+id/etTicket"
+                android:id="@+id/etNumber"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_width="60dp"
@@ -122,7 +123,7 @@
                 android:text="@string/detail_header_points" />
 
             <EditText
-                android:id="@+id/etQuantity"
+                android:id="@+id/etPoints"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_width="60dp"
@@ -138,6 +139,7 @@
 
 
         <ImageButton
+            android:id="@+id/ibAddTicketPlay"
             android:src="@drawable/ic_add"
             android:contentDescription="@string/btn_add_detail"
             android:layout_gravity="center"
@@ -205,7 +207,7 @@
 
         <ImageButton
             android:src="@drawable/ic_save"
-            android:id="@+id/btnSave"
+            android:id="@+id/ibSave"
             android:contentDescription="@string/btn_register_ticket"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -218,7 +220,7 @@
 
         <ImageButton
             android:contentDescription="@string/btn_clear"
-            android:id="@+id/btnClear"
+            android:id="@+id/ibClear"
             android:src="@drawable/ic_cancel"
             android:layout_width="70dp"
             android:layout_height="70dp"

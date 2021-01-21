@@ -64,7 +64,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/btnSave"
+                android:id="@+id/ibSave"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"

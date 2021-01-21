@@ -64,27 +64,29 @@ public class Global {
         builder.show();
     }
 
-    public static void saveGlobalPreference(Activity activity, String key, int value) {
+    public static void saveIntPref(Activity activity, String key, int value) {
         SharedPreferences sharedPref = activity.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(key, value);
         editor.apply();
     }
 
-    public static void saveStringGlobalPreference(Activity activity, String key, String value) {
+    public static void saveStringPref(Activity activity, String key, String value) {
         SharedPreferences sharedPref = activity.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
         editor.apply();
     }
 
-    public static int getIntFromGlobalPreferences(Activity activity, String key) {
+    public static int getIntFromPrefs(Activity activity, String key) {
         SharedPreferences sharedPref = activity.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
         return sharedPref.getInt(key, 0);
     }
 
-    public static String getStringFromGlobalPreferences(Activity activity, String key) {
-        SharedPreferences sharedPref = activity.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
+
+
+    public static String getStringFromPrefs(Context context, String key) {
+        SharedPreferences sharedPref = context.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
         return sharedPref.getString(key, "");
     }
 

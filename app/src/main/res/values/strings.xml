@@ -22,5 +22,9 @@
     <string name="btn_select_lotteries">Seleccionar loterías</string>
     <string name="btn_see_details">Ver</string>
     <string name="btn_register_ticket">Vender</string>
+    <string name="fragment_home_title">Registrar nuevo ticket</string>
+    <string name="selected_lotteries_label">Loterías selecciondas:\n%s</string>
+    <string name="dialog_title_error">Mensaje de error</string>
+    <string name="no_selected_lotteries">Loterías seleccionadas:\n-</string>
 
 </resources>

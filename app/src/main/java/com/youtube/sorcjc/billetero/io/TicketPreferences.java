@@ -61,13 +61,13 @@ public class TicketPreferences {
 
     public int getLimitTimes() {
         if (limitTimes == -1)
-            limitTimes = Global.getIntFromGlobalPreferences(activity, "limit_times");
+            limitTimes = Global.getIntFromPrefs(activity, "limit_times");
 
         return limitTimes;
     }
 
     public void setLimitTimes(final int newLimitTimes) {
-        Global.saveGlobalPreference(activity, "limit_times", newLimitTimes);
+        Global.saveIntPref(activity, "limit_times", newLimitTimes);
     }
 
 

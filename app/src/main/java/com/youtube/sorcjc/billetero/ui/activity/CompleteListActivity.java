@@ -1,6 +1,5 @@
 package com.youtube.sorcjc.billetero.ui.activity;
 
-import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
 import com.youtube.sorcjc.billetero.ui.adapter.CompleteListAdapter;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +43,7 @@ public class CompleteListActivity extends AppCompatActivity {
 
         // meta-data in top
         TextView tvUsername = (TextView) findViewById(R.id.tvUsername);
-        final String name = Global.getStringFromGlobalPreferences(this, "name");
+        final String name = Global.getStringFromPrefs(this, "name");
         tvUsername.setText(name + " | Total: " + totalSold);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US);
