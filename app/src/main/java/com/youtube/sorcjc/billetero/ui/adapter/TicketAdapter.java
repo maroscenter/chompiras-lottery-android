@@ -1,6 +1,7 @@
 package com.youtube.sorcjc.billetero.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.youtube.sorcjc.billetero.R;
 import com.youtube.sorcjc.billetero.model.Ticket;
+import com.youtube.sorcjc.billetero.ui.activity.TicketActivity;
 
 import java.util.ArrayList;
 
@@ -19,33 +20,34 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     private ArrayList<Ticket> mDataSet;
 
     // Define references to the views for each data item
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvId, tvCreatedAt, tvLotteries;
         public Button btnDetails;
 
-        private final Context context;
+        private final Context mContext;
 
         public ViewHolder(View v) {
             super(v);
 
-            context = v.getContext();
+            mContext = v.getContext();
 
             tvId = v.findViewById(R.id.tvTicketId);
             tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
             tvLotteries = v.findViewById(R.id.tvLotteries);
             btnDetails = v.findViewById(R.id.btnDetails);
 
-            btnDetails.setOnClickListener(this);
+            btnDetails.setOnClickListener(view -> startTicketActivity());
         }
 
-        @Override
-        public void onClick(View view) {
-            if (view.getId() == R.id.btnDetails) {
-                Toast.makeText(context, "Development", Toast.LENGTH_SHORT).show();
-            }
+
+        private void startTicketActivity() {
+            final Intent intent = new Intent(mContext, TicketActivity.class);
+            intent.putExtra("ticket_id", tvId.getText().toString());
+            mContext.startActivity(intent);
         }
     }
+
 
     public TicketAdapter() {
         mDataSet = new ArrayList<>();
@@ -59,12 +61,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     public void addItem(Ticket ticket) {
         mDataSet.add(ticket);
         notifyItemInserted(mDataSet.size() - 1);
-    }
-
-    public void updateItem(Ticket ticket, int position) {
-        // it is possible because the position is equals to the ticket number for each item
-        mDataSet.set(position, ticket);
-        notifyItemChanged(position);
     }
 
     private String twoDigits(final int i) {

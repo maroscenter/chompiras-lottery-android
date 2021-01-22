@@ -28,7 +28,6 @@ import retrofit2.Response;
 public class SoldTicketsFragment extends Fragment {
 
     private TicketAdapter mTicketAdapter;
-    private ArrayList<Ticket> ticketsSold;
 
     // private ProgressBar progressBar;
     // private ProgressDialog progressDialog;

@@ -4,6 +4,7 @@ import com.youtube.sorcjc.billetero.io.response.LoginResponse;
 import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.io.response.SoldTicketsResponse;
 import com.youtube.sorcjc.billetero.model.Lottery;
+import com.youtube.sorcjc.billetero.model.Ticket;
 import com.youtube.sorcjc.billetero.model.TicketBody;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MyApiService {
 
@@ -29,6 +32,13 @@ public interface MyApiService {
     @GET("tickets")
     Call<SoldTicketsResponse> getTickets(
             @Header("Authorization") String authHeader
+    );
+
+    @Headers("Accept: application/json")
+    @GET("tickets/{ticket}")
+    Call<Ticket> getTicket(
+            @Header("Authorization") String authHeader,
+            @Path("ticket") String ticketId
     );
 
     @FormUrlEncoded
