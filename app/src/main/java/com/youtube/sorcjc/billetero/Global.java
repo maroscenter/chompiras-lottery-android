@@ -9,10 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.youtube.sorcjc.billetero.ui.adapter.TicketOnNewQuantityListener;
 
 public class Global {
+
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
 
     public static void showMessageDialog(Context context, String title, String message) {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);

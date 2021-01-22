@@ -46,11 +46,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private AppCompatSpinner mSpinnerTypes;
 
-    private ArrayList<Lottery> mLotteries;
+    private ArrayList<Lottery> mLotteries = null;
 
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
 
-    final String[] items = {"Lotería 1", "Lotería 2", "Lotería 3", "Lotería 4", "Lotería 5"};
+    // final String[] items = {"Lotería 1", "Lotería 2", "Lotería 3", "Lotería 4", "Lotería 5"};
     final ArrayList<Integer> mSelectedLotteries = new ArrayList<>();
 
     public HomeFragment() {
@@ -86,13 +86,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setupSelectLotteries(View view) {
         ImageButton btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
 
-        btnSelectLotteries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createCheckboxesDialog();
-            }
+        btnSelectLotteries.setOnClickListener(view1 -> {
+            mSelectedLotteries.clear();
+            createCheckboxesDialog();
         });
-
     }
 
     @Override
@@ -105,6 +102,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     private void loadLotteries() {
+        if (mLotteries != null) {
+            return;
+        }
+
         MyApiAdapter.getApiService()
                 .getLotteries(User.getAuthHeader(getContext()))
                 .enqueue(new Callback<ArrayList<Lottery>>() {
@@ -131,24 +132,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         builder.setTitle("Loterías donde se registrarán las jugadas:");
 
-        builder.setMultiChoiceItems(items, null,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int selectedItemId, boolean isSelected) {
+        builder.setMultiChoiceItems(getLotteryNamesAsArray(), null,
+                (dialog, position, isSelected) -> {
+                    // Global.showToast(getContext(), String.valueOf(position));
+                    final Lottery selectedLottery = mLotteries.get(position);
+                    final int selectedLotteryId = selectedLottery.getId();
 
-                        if (isSelected) {
-                            mSelectedLotteries.add(selectedItemId);
-                        } else if (mSelectedLotteries.contains(selectedItemId)) {
-                            mSelectedLotteries.remove(Integer.valueOf(selectedItemId));
-                        }
+                    final boolean containedId = mSelectedLotteries.contains(selectedLotteryId);
+
+                    if (isSelected) {
+                        if (!containedId)
+                            mSelectedLotteries.add(selectedLotteryId);
+
+                    } else if (containedId) {
+                        // remove by object (value instead of id)
+                        mSelectedLotteries.remove((Integer) selectedLotteryId);
                     }
                 })
-                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        updateSelectedLotteries();
-                    }
-                })
+                .setPositiveButton("Confirmar", (dialog, id) -> updateSelectedLotteries())
                 .setNegativeButton("Cancelar", null);
 
         Dialog dialog = builder.create();
@@ -166,12 +167,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         StringBuilder lotteriesList = new StringBuilder();
 
         for (int i = 0; i < mSelectedLotteries.size(); i++) {
-            final int lotteryPosition = mSelectedLotteries.get(i);
-            final String lotteryAbbreviated = mLotteries.get(lotteryPosition).getAbbreviated();
-            lotteriesList.append(lotteryAbbreviated);
+            final int lotteryId = mSelectedLotteries.get(i);
+            final Lottery lottery = findLotteryById(lotteryId);
+            lotteriesList.append(lottery.getAbbreviated());
         }
 
         tvSelectedLotteries.setText(getString(R.string.selected_lotteries_label, lotteriesList.toString()));
+    }
+
+    private Lottery findLotteryById(int lotteryId) {
+        for (Lottery lottery : mLotteries) {
+            if (lottery.getId() == lotteryId) {
+                return lottery;
+            }
+        }
+
+        return null;
     }
 
     private void setupRecyclerView(View view) {
@@ -291,6 +302,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         return lotteryIds;
+    }
+
+    private String[] getLotteryNamesAsArray() {
+        final String[] names = new String[mLotteries.size()];
+
+        for (int i=0; i<mLotteries.size(); ++i) {
+            final Lottery lottery = mLotteries.get(i);
+            names[i] = lottery.getName();
+        }
+
+        return names;
     }
 
     private void showSuccessfulTicketDialog() {
