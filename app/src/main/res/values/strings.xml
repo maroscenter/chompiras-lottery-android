@@ -37,4 +37,8 @@
     <string name="ticket_header_lotteries">Loterías</string>
     <string name="ticket_header_details">Detalles</string>
     <string name="error_fetching_sold_tickets">No se han podido cargar los tickets vendidos.</string>
+    <string name="btn_pdf">Ver PDF</string>
+    <string name="label_ticket_id">Ticket:</string>
+    <string name="label_ticket_created_at">Fecha de compra:</string>
+    <string name="label_ticket_total">Total:</string>
 </resources>
