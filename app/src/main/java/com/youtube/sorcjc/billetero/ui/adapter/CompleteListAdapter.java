@@ -8,11 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
-import com.youtube.sorcjc.billetero.io.TicketPreferences;
-import com.youtube.sorcjc.billetero.model.Ticket;
-
 import java.util.ArrayList;
 
 public class CompleteListAdapter extends RecyclerView.Adapter<CompleteListAdapter.ViewHolder> {

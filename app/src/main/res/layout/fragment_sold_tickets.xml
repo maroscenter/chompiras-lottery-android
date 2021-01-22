@@ -6,7 +6,7 @@
     tools:context="com.youtube.sorcjc.billetero.ui.fragment.SoldTicketsFragment">
 
     <TextView
-        android:text="Tickets vendidos"
+        android:text="@string/fragment_tickets_title"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_weight="0.7"
             android:gravity="center"
             android:padding="8dp"
-            android:text="ID" />
+            android:text="@string/ticket_header_id" />
 
         <TextView
             android:layout_width="0dp"
@@ -31,7 +31,7 @@
             android:layout_weight="1.5"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Fecha y hora" />
+            android:text="@string/ticket_header_created_at" />
 
         <TextView
             android:layout_width="0dp"
@@ -39,7 +39,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Loterías" />
+            android:text="@string/ticket_header_lotteries" />
 
         <TextView
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Detalles" />
+            android:text="@string/ticket_header_details" />
     </LinearLayout>
 
     <FrameLayout
@@ -57,18 +57,20 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollList"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

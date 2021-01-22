@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.youtube.sorcjc.billetero.R;
-import com.youtube.sorcjc.billetero.io.TicketPreferences;
 import com.youtube.sorcjc.billetero.model.Ticket;
 import com.youtube.sorcjc.billetero.ui.adapter.TicketAdapter;
 
@@ -68,32 +67,11 @@ public class WinnersFragment extends Fragment implements View.OnClickListener {
     private void loadTicketsSoldList() {
         ticketsSold = new ArrayList<>();
 
-        TicketPreferences ticketPreferences = new TicketPreferences(getActivity());
-
-        for (int i=0; i<=99; ++i) {
-            Ticket ticket = ticketPreferences.getTicketAt(i);
-            ticketsSold.add(ticket);
-
-            int milliseconds;
-            if (i<=36 && i%2==0) {
-                milliseconds = 50;
-                try {
-                    Thread.sleep(milliseconds);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     @Override
     public void onClick(View view) {
 
-    }
-
-    private void sendToServer() {
-        // Call<SimpleResponse> call = MyApiAdapter.getApiService().postSentList(ticketsIntSold, user_id);
-        // call.enqueue(new SentListCallback());
     }
 
 }

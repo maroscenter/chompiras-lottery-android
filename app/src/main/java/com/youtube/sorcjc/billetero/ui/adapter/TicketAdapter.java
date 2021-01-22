@@ -16,7 +16,7 @@ import com.youtube.sorcjc.billetero.model.Ticket;
 import java.util.ArrayList;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder> {
-    private ArrayList<Ticket> dataSet;
+    private ArrayList<Ticket> mDataSet;
 
     // Define references to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -48,21 +48,22 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     }
 
     public TicketAdapter() {
-        dataSet = new ArrayList<>();
+        mDataSet = new ArrayList<>();
     }
 
     public void setDataSet(ArrayList<Ticket> dataSet) {
-        this.dataSet = dataSet;
+        this.mDataSet = dataSet;
+        notifyDataSetChanged();
     }
 
     public void addItem(Ticket ticket) {
-        dataSet.add(ticket);
-        notifyItemInserted(dataSet.size() - 1);
+        mDataSet.add(ticket);
+        notifyItemInserted(mDataSet.size() - 1);
     }
 
     public void updateItem(Ticket ticket, int position) {
         // it is possible because the position is equals to the ticket number for each item
-        dataSet.set(position, ticket);
+        mDataSet.set(position, ticket);
         notifyItemChanged(position);
     }
 
@@ -89,7 +90,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // get element from the data set
-        Ticket ticket = dataSet.get(position);
+        Ticket ticket = mDataSet.get(position);
 
         // replace the contents of the view with that element
         holder.tvId.setText(twoDigits(ticket.getId()));
@@ -99,7 +100,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return mDataSet.size();
     }
 }
 

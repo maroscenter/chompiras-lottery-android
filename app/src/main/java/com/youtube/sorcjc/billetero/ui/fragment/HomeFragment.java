@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
 import com.youtube.sorcjc.billetero.io.MyApiAdapter;
-import com.youtube.sorcjc.billetero.io.TicketPreferences;
 import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.model.Lottery;
 import com.youtube.sorcjc.billetero.model.TicketBody;
@@ -32,7 +31,6 @@ import com.youtube.sorcjc.billetero.model.User;
 import com.youtube.sorcjc.billetero.ui.adapter.TicketPlayAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;

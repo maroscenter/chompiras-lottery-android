@@ -19,12 +19,22 @@
     <string name="detail_header_type">Jugada</string>
     <string name="detail_header_number">Número</string>
     <string name="detail_header_points">Puntos</string>
+
     <string name="btn_select_lotteries">Seleccionar loterías</string>
     <string name="btn_see_details">Ver</string>
     <string name="btn_register_ticket">Vender</string>
+
+    <!-- HomeFragment -->
     <string name="fragment_home_title">Registrar nuevo ticket</string>
     <string name="selected_lotteries_label">Loterías selecciondas:\n%s</string>
     <string name="dialog_title_error">Mensaje de error</string>
     <string name="no_selected_lotteries">Loterías seleccionadas:\n-</string>
 
+    <!-- TicketsFragment -->
+    <string name="fragment_tickets_title">Tickets vendidos</string>
+    <string name="ticket_header_id">ID</string>
+    <string name="ticket_header_created_at">Fecha y hora</string>
+    <string name="ticket_header_lotteries">Loterías</string>
+    <string name="ticket_header_details">Detalles</string>
+    <string name="error_fetching_sold_tickets">No se han podido cargar los tickets vendidos.</string>
 </resources>
