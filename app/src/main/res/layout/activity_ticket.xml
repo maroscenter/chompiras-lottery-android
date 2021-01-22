@@ -20,9 +20,11 @@
         <TextView
             android:id="@+id/tvTicketId"
             tools:text="2"
+            android:layout_marginLeft="4dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,13 +41,17 @@
         <TextView
             android:id="@+id/tvTicketCreatedAt"
             tools:text="2021-01-12"
+            android:layout_marginLeft="4dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <include layout="@layout/ticket_plays_header" />
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         tools:listitem="@layout/item_ticket_play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -63,9 +69,11 @@
         <TextView
             android:id="@+id/tvTicketTotal"
             tools:text="$ 120"
+            android:layout_marginLeft="4dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <Button

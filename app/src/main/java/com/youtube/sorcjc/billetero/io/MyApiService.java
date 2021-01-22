@@ -3,6 +3,7 @@ package com.youtube.sorcjc.billetero.io;
 import com.youtube.sorcjc.billetero.io.response.LoginResponse;
 import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.io.response.SoldTicketsResponse;
+import com.youtube.sorcjc.billetero.io.response.TicketResponse;
 import com.youtube.sorcjc.billetero.model.Lottery;
 import com.youtube.sorcjc.billetero.model.Ticket;
 import com.youtube.sorcjc.billetero.model.TicketBody;
@@ -36,7 +37,7 @@ public interface MyApiService {
 
     @Headers("Accept: application/json")
     @GET("tickets/{ticket}")
-    Call<Ticket> getTicket(
+    Call<TicketResponse> getTicket(
             @Header("Authorization") String authHeader,
             @Path("ticket") String ticketId
     );

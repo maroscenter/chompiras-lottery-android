@@ -96,12 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     this,
                     "Confirmar acción",
                     "¿Desea cerrar sesión?",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            performLogout();
-                        }
-                    }
+                    (dialogInterface, i) -> performLogout()
             );
 
             return true;
@@ -115,8 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performLogout() {
-        Global.saveStringPref(this, "name", "");
-        Global.saveIntPref(this, "user_id", 0);
+        Global.saveStringPref(this, "access_token", "");
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

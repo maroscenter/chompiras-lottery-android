@@ -10,21 +10,26 @@ import com.youtube.sorcjc.billetero.model.TicketPlay
 import kotlinx.android.synthetic.main.item_ticket_play.view.*
 
 
-class TicketPlayAdapter (private var ticketPlays: ArrayList<TicketPlay> = ArrayList())
+class TicketPlayAdapter (private var mDataSet: ArrayList<TicketPlay> = ArrayList())
     : RecyclerView.Adapter<TicketPlayAdapter.ViewHolder>() {
 
     fun addPlay(ticketPlay: TicketPlay) {
-        ticketPlays.add(ticketPlay)
-        notifyItemInserted(ticketPlays.size - 1)
+        mDataSet.add(ticketPlay)
+        notifyItemInserted(mDataSet.size - 1)
+    }
+
+    fun setDataSet(plays: ArrayList<TicketPlay>) {
+        mDataSet = plays
+        notifyDataSetChanged()
     }
 
     fun clear() {
-        ticketPlays.clear();
+        mDataSet.clear();
         notifyDataSetChanged();
     }
 
     fun getPlays(): ArrayList<TicketPlay> {
-        return ticketPlays;
+        return mDataSet;
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,10 +49,10 @@ class TicketPlayAdapter (private var ticketPlays: ArrayList<TicketPlay> = ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ticketPlay = ticketPlays[position]
+        val ticketPlay = mDataSet[position]
 
         holder.bind(ticketPlay)
     }
 
-    override fun getItemCount() = ticketPlays.size
+    override fun getItemCount() = mDataSet.size
 }
