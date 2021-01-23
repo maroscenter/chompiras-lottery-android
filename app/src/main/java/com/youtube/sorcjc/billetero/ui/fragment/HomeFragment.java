@@ -297,8 +297,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final int[] lotteryIds = new int[mSelectedLotteries.size()];
 
         for (int i=0; i<mSelectedLotteries.size(); ++i) {
-            final int position = mSelectedLotteries.get(i);
-            lotteryIds[i] = mLotteries.get(position).getId();
+            lotteryIds[i] = mSelectedLotteries.get(i);
         }
 
         return lotteryIds;

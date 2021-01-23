@@ -18,10 +18,10 @@
         android:id="@+id/tvNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:text="15" />
+        tools:text="153422" />
 
     <TextView
         android:id="@+id/tvPoints"
