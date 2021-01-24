@@ -31,6 +31,13 @@ public interface MyApiService {
     );
 
     @Headers("Accept: application/json")
+    @GET("paid/{winnerId}")
+    Call<SimpleResponse> payWinner(
+            @Header("Authorization") String authHeader,
+            @Path("winnerId") int winnerId
+    );
+
+    @Headers("Accept: application/json")
     @GET("lotteries")
     Call<ArrayList<Lottery>> getLotteries(
             @Header("Authorization") String authHeader

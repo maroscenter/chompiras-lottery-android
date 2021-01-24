@@ -1,7 +1,7 @@
 package com.youtube.sorcjc.billetero.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +10,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
+import com.youtube.sorcjc.billetero.io.MyApiAdapter;
+import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.model.TicketPlay;
+import com.youtube.sorcjc.billetero.model.User;
 import com.youtube.sorcjc.billetero.model.Winner;
-import com.youtube.sorcjc.billetero.ui.activity.TicketActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder> {
     private ArrayList<Winner> mDataSet;
@@ -42,12 +49,6 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
             tvReward = v.findViewById(R.id.tvReward);
 
             btnPay = v.findViewById(R.id.btnPayWinner);
-            btnPay.setOnClickListener(view -> payWinner());
-        }
-
-
-        private void payWinner() {
-
         }
     }
 
@@ -94,6 +95,49 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
 
         final String reward = "$ " + winner.getReward();
         holder.tvReward.setText(reward);
+
+        if (winner.getPaid()) {
+            holder.btnPay.setEnabled(false);
+        } else {
+            holder.btnPay.setEnabled(true);
+            holder.btnPay.setOnClickListener(view -> {
+                final Context context = holder.mContext;
+                confirmPayment(context, winner.getId());
+            });
+        }
+    }
+
+    private void confirmPayment(Context context, int winnerId) {
+        final String title = "Confirmación de pago";
+        final String message = "¿Está seguro que desea pagar el premio #" + winnerId + "?";
+        Global.showConfirmationDialog(context, title, message, (dialogInterface, i) -> {
+            payWinner(context, winnerId);
+        });
+    }
+
+    private void payWinner(Context context, int winnerId) {
+        final String authHeader = User.getAuthHeader(context);
+
+        MyApiAdapter.getApiService().payWinner(authHeader, winnerId).enqueue(new Callback<SimpleResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SimpleResponse> call, @NonNull Response<SimpleResponse> response) {
+                if (response.isSuccessful()) {
+                    SimpleResponse simpleResponse = response.body();
+                    if (simpleResponse.isSuccess()) {
+                        Global.showMessageDialog(context, "Confirmación", "El pago se ha registrado correctamente.");
+                    } else {
+                        Global.showMessageDialog(context, "Pago no realizado", simpleResponse.getErrorMessage());
+                    }
+                } else {
+                    Global.showMessageDialog(context, "Pago no realizado", "Ocurrió un error inesperado.");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SimpleResponse> call, @NonNull Throwable t) {
+                Global.showMessageDialog(context, "Pago no realizado", t.getMessage());
+            }
+        });
     }
 
     @Override
