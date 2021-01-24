@@ -41,4 +41,8 @@
     <string name="label_ticket_id">Ticket:</string>
     <string name="label_ticket_created_at">Fecha de compra:</string>
     <string name="label_ticket_total">Total:</string>
+    <string name="btn_pay_winner">Pagar</string>
+    <string name="label_reward">Premio</string>
+    <string name="fragment_winners_title">Jugadas ganadoras</string>
+    <string name="error_fetch_winners">No se pudo cargar la lista de ganadores.</string>
 </resources>

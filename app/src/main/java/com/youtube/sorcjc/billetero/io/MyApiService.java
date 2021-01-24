@@ -7,6 +7,7 @@ import com.youtube.sorcjc.billetero.io.response.TicketResponse;
 import com.youtube.sorcjc.billetero.model.Lottery;
 import com.youtube.sorcjc.billetero.model.Ticket;
 import com.youtube.sorcjc.billetero.model.TicketBody;
+import com.youtube.sorcjc.billetero.model.Winner;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MyApiService {
+
+    @Headers("Accept: application/json")
+    @GET("winners")
+    Call<ArrayList<Winner>> getWinners(
+            @Header("Authorization") String authHeader
+    );
 
     @Headers("Accept: application/json")
     @GET("lotteries")

@@ -67,7 +67,7 @@ class TicketActivity : AppCompatActivity() {
     private fun displayTicket(ticket: Ticket) {
         title = "Ticket #${ticket.id}"
 
-        tvTicketId.text = ticket.id.toString()
+        tvWinnerId.text = ticket.id.toString()
         tvTicketCreatedAt.text = ticket.createdAt
         tvTicketTotal.text = "$ ${ticket.totalPoints}"
 

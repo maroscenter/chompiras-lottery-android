@@ -13,20 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
-import com.youtube.sorcjc.billetero.model.Ticket;
-import com.youtube.sorcjc.billetero.ui.adapter.TicketAdapter;
+import com.youtube.sorcjc.billetero.io.MyApiAdapter;
+import com.youtube.sorcjc.billetero.model.User;
+import com.youtube.sorcjc.billetero.model.Winner;
+import com.youtube.sorcjc.billetero.ui.adapter.WinnerAdapter;
 
 import java.util.ArrayList;
 
-public class WinnersFragment extends Fragment implements View.OnClickListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class WinnersFragment extends Fragment {
 
     private NestedScrollView scrollView;
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
-    private TicketAdapter ticketAdapter;
-    private ArrayList<Ticket> ticketsSold;
+    private WinnerAdapter mAdapter;
 
     // private ProgressDialog progressDialog;
 
@@ -42,36 +47,56 @@ public class WinnersFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_winners, container, false);
 
         scrollView = view.findViewById(R.id.scrollList);
+        progressBar = view.findViewById(R.id.progressBar);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        setupRecyclerView(view);
+
+        return view;
+    }
+
+    private void setupRecyclerView(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayout);
 
-        ticketAdapter = new TicketAdapter();
-        recyclerView.setAdapter(ticketAdapter);
+        mAdapter = new WinnerAdapter();
+        recyclerView.setAdapter(mAdapter);
 
         recyclerView.setNestedScrollingEnabled(false);
-
-        progressBar = view.findViewById(R.id.progressBar);
-
-        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadTicketsSoldList();
+        loadWinners();
     }
 
-    private void loadTicketsSoldList() {
-        ticketsSold = new ArrayList<>();
+    private void loadWinners() {
+        final String authHeader = User.getAuthHeader(getContext());
 
+        MyApiAdapter.getApiService().getWinners(authHeader).enqueue(new Callback<ArrayList<Winner>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<Winner>> call, @NonNull Response<ArrayList<Winner>> response) {
+                if (response.isSuccessful()) {
+                    displayWinners(response.body());
+                } else {
+                    showErrorWinnersDialog(getString(R.string.error_fetch_winners));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<Winner>> call, @NonNull Throwable t) {
+                showErrorWinnersDialog(t.getLocalizedMessage());
+            }
+        });
     }
 
-    @Override
-    public void onClick(View view) {
-
+    private void displayWinners(ArrayList<Winner> winners) {
+        mAdapter.setDataSet(winners);
     }
 
+    private void showErrorWinnersDialog(String errorMessage) {
+        Global.showMessageDialog(getContext(), "Error inesperado", errorMessage);
+    }
 }

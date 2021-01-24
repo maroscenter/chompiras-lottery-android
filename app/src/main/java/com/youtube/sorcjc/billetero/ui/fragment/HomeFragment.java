@@ -41,7 +41,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private EditText etNumber, etPoints;
     private TextView tvSelectedLotteries;
 
-    private RecyclerView mRecyclerView;
     private TicketPlayAdapter mAdapter;
 
     private AppCompatSpinner mSpinnerTypes;
@@ -50,13 +49,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
 
-    // final String[] items = {"Lotería 1", "Lotería 2", "Lotería 3", "Lotería 4", "Lotería 5"};
     final ArrayList<Integer> mSelectedLotteries = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -186,7 +183,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setupRecyclerView(View view) {
-        mRecyclerView = view.findViewById(R.id.rvTicketDetails);
+        RecyclerView mRecyclerView = view.findViewById(R.id.rvTicketDetails);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);

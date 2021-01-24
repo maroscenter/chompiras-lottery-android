@@ -32,7 +32,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
             mContext = v.getContext();
 
-            tvId = v.findViewById(R.id.tvTicketId);
+            tvId = v.findViewById(R.id.tvWinnerId);
             tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
             tvLotteries = v.findViewById(R.id.tvLotteries);
             btnDetails = v.findViewById(R.id.btnDetails);
