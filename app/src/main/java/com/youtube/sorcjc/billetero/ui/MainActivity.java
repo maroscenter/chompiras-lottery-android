@@ -17,7 +17,7 @@ import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
 import com.youtube.sorcjc.billetero.ui.fragment.HomeFragment;
 import com.youtube.sorcjc.billetero.ui.fragment.SoldTicketsFragment;
-import com.youtube.sorcjc.billetero.ui.fragment.TotalFragment;
+import com.youtube.sorcjc.billetero.ui.fragment.EarningsFragment;
 import com.youtube.sorcjc.billetero.ui.fragment.WinnersFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         } else if (item.getItemId() == R.id.action_winners) {
                             fragment = new WinnersFragment();
                         } else if (item.getItemId() == R.id.action_total) {
-                            fragment = new TotalFragment();
+                            fragment = new EarningsFragment();
                         }
 
                         // replace fragment content

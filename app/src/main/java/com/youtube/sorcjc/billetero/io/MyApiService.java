@@ -1,5 +1,6 @@
 package com.youtube.sorcjc.billetero.io;
 
+import com.youtube.sorcjc.billetero.io.response.EarningsResponse;
 import com.youtube.sorcjc.billetero.io.response.LoginResponse;
 import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.io.response.SoldTicketsResponse;
@@ -23,6 +24,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MyApiService {
+
+    @Headers("Accept: application/json")
+    @GET("earnings")
+    Call<EarningsResponse> getEarnings(
+            @Header("Authorization") String authHeader
+    );
 
     @Headers("Accept: application/json")
     @GET("winners")
