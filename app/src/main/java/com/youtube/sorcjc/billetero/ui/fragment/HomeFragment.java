@@ -242,26 +242,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void save() {
-        /*
-        if (ticketNumberString.isEmpty() || quantityString.isEmpty()) {
-            Global.showMessageDialog(getContext(), "No se pudo guardar", "Asegúrese de ingresar un valor para cada campo.");
-            return;
-        }
-
-        final int ticketNumber = Integer.parseInt(ticketNumberString);
-        final int quantity = Integer.parseInt(quantityString);
-
-        if (ticketNumber<0 || ticketNumber>99) {
-            Global.showMessageDialog(getContext(), "No se pudo guardar", "Ingrese una cifra entre 0 y 99.");
-            return;
-        }
-
-        if (quantity<=0) {
-            Global.showMessageDialog(getContext(), "No se pudo guardar", "Ingrese una cantidad de tiempos válida.");
-            return;
-        }
-        */
-
         final String authHeader = User.getAuthHeader(getContext());
         final TicketBody ticketBody = new TicketBody(getLotteryIdsAsArray(), mAdapter.getPlays());
 
@@ -313,6 +293,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void showSuccessfulTicketDialog() {
         Global.showMessageDialog(getContext(), "Operación exitosa", "El ticket se ha registrado correctamente.");
+        clear();
     }
 
     private void showErrorTicketDialog(String errorMessage) {

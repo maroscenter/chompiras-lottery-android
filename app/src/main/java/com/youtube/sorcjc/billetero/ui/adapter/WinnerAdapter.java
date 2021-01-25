@@ -30,7 +30,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvId, tvCreatedAt, tvLottery, tvPoints, tvType, tvNumber, tvReward;
+        public TextView tvId, tvCreatedAt, tvLottery, tvPoints, tvType, tvNumber, tvReward, tvAlreadyPaid;
         public Button btnPay;
 
         private final Context mContext;
@@ -47,6 +47,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
             tvType = v.findViewById(R.id.tvType);
             tvNumber = v.findViewById(R.id.tvNumber);
             tvReward = v.findViewById(R.id.tvReward);
+            tvAlreadyPaid = v.findViewById(R.id.tvTicketAlreadyPaid);
 
             btnPay = v.findViewById(R.id.btnPayWinner);
         }
@@ -97,9 +98,11 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
         holder.tvReward.setText(reward);
 
         if (winner.getPaid()) {
-            holder.btnPay.setEnabled(false);
+            holder.btnPay.setVisibility(View.GONE);
+            holder.tvAlreadyPaid.setVisibility(View.VISIBLE);
         } else {
-            holder.btnPay.setEnabled(true);
+            // holder.btnPay.setEnabled(true);
+            holder.tvAlreadyPaid.setVisibility(View.GONE);
             holder.btnPay.setOnClickListener(view -> {
                 final Context context = holder.mContext;
                 confirmPayment(context, winner.getId());
