@@ -54,4 +54,5 @@
     <string name="fragment_earnings_title">Ganancias y comisiones</string>
     <string name="error_fetch_earnings">No se pudo obtener la información de ganancias</string>
     <string name="already_paid">Este ticket ya está pagado</string>
+    <string name="btn_remove_ticket_play">Eliminar jugada</string>
 </resources>

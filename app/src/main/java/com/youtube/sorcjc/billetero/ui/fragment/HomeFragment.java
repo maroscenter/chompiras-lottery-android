@@ -188,7 +188,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new TicketPlayAdapter(ticketPlays);
+        mAdapter = new TicketPlayAdapter(ticketPlays, true);
         mRecyclerView.setAdapter(mAdapter);
     }
 

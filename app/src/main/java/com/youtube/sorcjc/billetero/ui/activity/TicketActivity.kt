@@ -34,7 +34,7 @@ class TicketActivity : AppCompatActivity() {
             fetchTicketInfo(it)
         }
 
-        mAdapter = TicketPlayAdapter()
+        mAdapter = TicketPlayAdapter(allowRemoveItem=false)
     }
 
     private fun setupPDFLink(ticketId: Int) {

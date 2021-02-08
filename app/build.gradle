@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
+    kotlinOptions {
+        jvmTarget = '1.8'
+        languageVersion = "1.4"
+    }
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {

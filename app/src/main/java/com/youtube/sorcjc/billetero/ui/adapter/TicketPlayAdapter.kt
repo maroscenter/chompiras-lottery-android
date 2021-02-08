@@ -4,13 +4,17 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import com.youtube.sorcjc.billetero.R
 import com.youtube.sorcjc.billetero.model.TicketPlay
 import kotlinx.android.synthetic.main.item_ticket_play.view.*
 
 
-class TicketPlayAdapter (private var mDataSet: ArrayList<TicketPlay> = ArrayList())
+class TicketPlayAdapter (
+        private var mDataSet: ArrayList<TicketPlay> = ArrayList(),
+        private val allowRemoveItem: Boolean
+)
     : RecyclerView.Adapter<TicketPlayAdapter.ViewHolder>() {
 
     fun addPlay(ticketPlay: TicketPlay) {
@@ -34,10 +38,20 @@ class TicketPlayAdapter (private var mDataSet: ArrayList<TicketPlay> = ArrayList
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(ticketPlay: TicketPlay) = with (itemView) {
+        fun setTexts(ticketPlay: TicketPlay) = with (itemView) {
             tvNumber.text = ticketPlay.number.toString()
             tvPoints.text = ticketPlay.points.toString()
             tvType.text = ticketPlay.type
+
+        }
+
+        fun setDeleteButton(removeItem: Boolean, onClick: (View)->Unit) = with (itemView) {
+            if (removeItem) {
+                ibDelete.visibility = View.VISIBLE
+                ibDelete.setOnClickListener(onClick)
+            } else {
+                ibDelete.visibility = View.GONE
+            }
         }
     }
 
@@ -51,7 +65,11 @@ class TicketPlayAdapter (private var mDataSet: ArrayList<TicketPlay> = ArrayList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ticketPlay = mDataSet[position]
 
-        holder.bind(ticketPlay)
+        holder.setTexts(ticketPlay)
+
+        holder.setDeleteButton(allowRemoveItem) {
+            mDataSet.remove(ticketPlay)
+        }
     }
 
     override fun getItemCount() = mDataSet.size
