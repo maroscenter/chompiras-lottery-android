@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private AppCompatSpinner mSpinnerTypes;
 
-    private ArrayList<Lottery> mLotteries = null;
+    private ArrayList<Lottery> mLotteries = new ArrayList<>();
 
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
 
@@ -99,7 +99,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     private void loadLotteries() {
-        if (mLotteries != null) {
+        // skip if already fetched
+        if (!mLotteries.isEmpty()) {
             return;
         }
 
@@ -190,6 +191,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mAdapter = new TicketPlayAdapter(ticketPlays, true);
         mRecyclerView.setAdapter(mAdapter);
+
+        // header: show last column
+        view.findViewById(R.id.viewLastColumn).setVisibility(View.VISIBLE);
     }
 
     private void populateSpinnerTypes(View view) {

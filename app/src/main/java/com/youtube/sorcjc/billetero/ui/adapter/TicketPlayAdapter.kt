@@ -69,6 +69,7 @@ class TicketPlayAdapter (
 
         holder.setDeleteButton(allowRemoveItem) {
             mDataSet.remove(ticketPlay)
+            notifyItemRemoved(position)
         }
     }
 

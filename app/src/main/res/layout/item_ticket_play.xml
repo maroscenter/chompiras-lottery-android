@@ -38,8 +38,7 @@
         tools:visibility="visible"
         android:visibility="gone"
         android:src="@drawable/ic_delete"
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/btn_remove_ticket_play" />
 </LinearLayout>
