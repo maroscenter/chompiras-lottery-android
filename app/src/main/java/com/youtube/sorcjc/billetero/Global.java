@@ -19,9 +19,21 @@ public class Global {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    public static void showToast(Context context, int stringResource) {
+        Toast.makeText(context, stringResource, Toast.LENGTH_SHORT).show();
+    }
+
     public static void showMessageDialog(Context context, String title, String message) {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
         adb.setTitle(title);
+        adb.setMessage(message);
+        adb.setPositiveButton("Ok", null);
+        adb.show();
+    }
+
+    public static void showMessageDialog(Context context, int titleRes, String message) {
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setTitle(titleRes);
         adb.setMessage(message);
         adb.setPositiveButton("Ok", null);
         adb.show();

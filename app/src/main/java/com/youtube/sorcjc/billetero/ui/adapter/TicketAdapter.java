@@ -8,13 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
+import com.youtube.sorcjc.billetero.io.MyApiAdapter;
+import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.model.Ticket;
+import com.youtube.sorcjc.billetero.model.User;
 import com.youtube.sorcjc.billetero.ui.activity.TicketActivity;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder> {
     private ArrayList<Ticket> mDataSet;
@@ -23,7 +33,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvId, tvCreatedAt, tvLotteries;
-        public Button btnDetails;
+        public ImageButton btnDetails, btnDelete;
 
         private final Context mContext;
 
@@ -36,8 +46,10 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
             tvLotteries = v.findViewById(R.id.tvLotteries);
             btnDetails = v.findViewById(R.id.btnDetails);
+            btnDelete = v.findViewById(R.id.btnDelete);
 
             btnDetails.setOnClickListener(view -> startTicketActivity());
+            btnDelete.setOnClickListener(view -> deleteTicket());
         }
 
 
@@ -45,6 +57,37 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             final Intent intent = new Intent(mContext, TicketActivity.class);
             intent.putExtra("ticket_id", tvId.getText().toString());
             mContext.startActivity(intent);
+        }
+
+        private void deleteTicket() {
+            final String authHeader = User.getAuthHeader(mContext);
+            final String ticketId = tvId.getText().toString();
+
+            MyApiAdapter.getApiService().deleteTicket(authHeader, ticketId).enqueue(new Callback<SimpleResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<SimpleResponse> call, @NonNull Response<SimpleResponse> response) {
+                    if (response.isSuccessful()) {
+                        SimpleResponse simpleResponse = response.body();
+                        if (simpleResponse == null) {
+                            Global.showToast(mContext, R.string.retrofit_response_not_successful);
+                            return;
+                        }
+
+                        if (simpleResponse.isSuccess()) {
+                            Global.showMessageDialog(mContext, "Operación exitosa", "Ticket anulado correctamente");
+                        } else {
+                            Global.showMessageDialog(mContext, R.string.dialog_title_error, simpleResponse.getErrorMessage());
+                        }
+                    } else {
+                        Global.showToast(mContext, R.string.retrofit_response_not_successful);
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<SimpleResponse> call, @NonNull Throwable t) {
+                    Global.showToast(mContext, t.getLocalizedMessage());
+                }
+            });
         }
     }
 

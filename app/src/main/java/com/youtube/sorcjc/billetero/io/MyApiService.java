@@ -78,4 +78,11 @@ public interface MyApiService {
             @Body TicketBody ticketBody
     );
 
+    @Headers("Accept: application/json")
+    @GET("tickets/{ticket}/delete")
+    Call<SimpleResponse> deleteTicket(
+            @Header("Authorization") String authHeader,
+            @Path("ticket") String ticketId
+    );
+
 }

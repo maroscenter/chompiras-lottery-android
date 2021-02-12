@@ -33,10 +33,17 @@
         tools:text="LotA LotB LotC"
         android:padding="8dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnDetails"
-        android:text="@string/btn_see_details"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:src="@drawable/ic_eye"
+        android:contentDescription="@string/btn_see_details"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="@string/btn_delete_ticket"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
 </LinearLayout>
