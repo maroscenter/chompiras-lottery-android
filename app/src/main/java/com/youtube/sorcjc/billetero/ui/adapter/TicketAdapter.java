@@ -49,9 +49,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             btnDelete = v.findViewById(R.id.btnDelete);
 
             btnDetails.setOnClickListener(view -> startTicketActivity());
-            btnDelete.setOnClickListener(view -> deleteTicket());
         }
 
+        public void setupDeleteButton(int position, Runnable successCallback) {
+            btnDelete.setOnClickListener(view -> deleteTicket(position, successCallback));
+        }
 
         private void startTicketActivity() {
             final Intent intent = new Intent(mContext, TicketActivity.class);
@@ -59,7 +61,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             mContext.startActivity(intent);
         }
 
-        private void deleteTicket() {
+        private void deleteTicket(final int position, Runnable successCallback) {
             final String authHeader = User.getAuthHeader(mContext);
             final String ticketId = tvId.getText().toString();
 
@@ -75,6 +77,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
                         if (simpleResponse.isSuccess()) {
                             Global.showMessageDialog(mContext, "Operación exitosa", "Ticket anulado correctamente");
+                            successCallback.run();
                         } else {
                             Global.showMessageDialog(mContext, R.string.dialog_title_error, simpleResponse.getErrorMessage());
                         }
@@ -119,9 +122,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_ticket, parent, false);
 
-        // set the view's size, margins, padding and layout parameters
-        // ...
-
         return new ViewHolder(v);
     }
 
@@ -135,6 +135,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         holder.tvId.setText(twoDigits(ticket.getId()));
         holder.tvCreatedAt.setText(ticket.getCreatedAt());
         holder.tvLotteries.setText(ticket.getLotteries());
+
+        holder.setupDeleteButton(position, () -> {
+            mDataSet.remove(position);
+            notifyItemRemoved(position);
+        });
     }
 
     @Override

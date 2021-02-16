@@ -38,8 +38,12 @@ class TicketActivity : AppCompatActivity() {
     }
 
     private fun setupPDFLink(ticketId: Int) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://mrm-lotery.com/ticket/${ticketId}/pdf"))
-        startActivity(browserIntent)
+        btnPDF.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://mrm-lotery.com/ticket/${ticketId}/pdf"))
+            startActivity(browserIntent)
+        }
+
+        btnPDF.isEnabled = true
     }
 
     private fun fetchTicketInfo(ticketId: String) {
