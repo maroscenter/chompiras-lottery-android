@@ -39,7 +39,7 @@ class TicketActivity : AppCompatActivity() {
 
     private fun setupPDFLink(ticketId: Int) {
         btnPDF.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://mrm-lotery.com/ticket/${ticketId}/pdf"))
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://chompiraslottery.com/ticket/${ticketId}/pdf"))
             startActivity(browserIntent)
         }
 
