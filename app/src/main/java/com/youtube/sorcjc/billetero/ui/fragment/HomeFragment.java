@@ -230,7 +230,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void addPlay() {
-        final int number = Integer.parseInt(etNumber.getText().toString());
+        final String number = etNumber.getText().toString();
         final int points = Integer.parseInt(etPoints.getText().toString());
         final String type = mSpinnerTypes.getSelectedItem().toString();
 
