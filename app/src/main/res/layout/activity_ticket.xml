@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="6dp"
+    android:padding="8dp"
     tools:context=".ui.activity.TicketActivity">
 
     <LinearLayout
@@ -14,12 +14,14 @@
 
         <TextView
             android:text="@string/label_ticket_id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvWinnerId"
             tools:text="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginLeft="4dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
 
     <LinearLayout
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="12dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -36,10 +39,12 @@
         <TextView
             android:text="@string/label_ticket_created_at"
             android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvTicketCreatedAt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="2021-01-12"
             android:layout_marginLeft="4dp"
             android:layout_gravity="center"
@@ -50,25 +55,50 @@
 
     <include layout="@layout/ticket_plays_header" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        tools:listitem="@layout/item_ticket_play"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollList"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                tools:listitem="@layout/item_ticket_play"
+                tools:itemCount="7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.NestedScrollView>
+    </FrameLayout>
+
+
 
     <LinearLayout
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:text="@string/label_ticket_total"
             android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvTicketTotal"
             tools:text="$ 120"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_marginLeft="4dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"

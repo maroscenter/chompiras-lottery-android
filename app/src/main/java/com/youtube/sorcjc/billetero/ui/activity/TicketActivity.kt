@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.youtube.sorcjc.billetero.Global
 import com.youtube.sorcjc.billetero.R
 import com.youtube.sorcjc.billetero.io.MyApiAdapter
@@ -84,9 +85,12 @@ class TicketActivity : AppCompatActivity() {
 
         recyclerView.adapter = mAdapter
         mAdapter.setDataSet(plays)
+
+        progressBar.visibility = View.GONE
+        scrollList.visibility = View.VISIBLE
     }
 
     private fun showErrorMessage() {
-        Global.showMessageDialog(this, "Error inesperado", "No se pudo cargar la información del Ticket")
+        Global.showMessageDialog(this, getString(R.string.error_unexpected), getString(R.string.error_fetching_ticket))
     }
 }

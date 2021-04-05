@@ -46,6 +46,7 @@
     <string name="label_ticket_id">Ticket:</string>
     <string name="label_ticket_created_at">Fecha de compra:</string>
     <string name="label_ticket_total">Total:</string>
+    <string name="error_fetching_ticket">No se ha podido cargar la info del ticket seleccionado.</string>
 
     <!-- WinnersFragment -->
     <string name="fragment_winners_title">Jugadas ganadoras</string>
