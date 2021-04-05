@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     final ArrayList<Integer> mSelectedLotteries = new ArrayList<>();
 
+    // Buttons
+    private ImageButton btnSave;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -60,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImageButton btnSave = view.findViewById(R.id.ibSave);
+        btnSave = view.findViewById(R.id.ibSave);
         btnSave.setOnClickListener(this);
 
         ImageButton btnAdd = view.findViewById(R.id.ibAddTicketPlay);
@@ -230,8 +234,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void addPlay() {
+        // Client-side validations
+        final String pointsStr = etPoints.getText().toString();
+        if (pointsStr.isEmpty()) {
+            Global.showToast(getContext(), getString(R.string.error_invalid_play_points));
+            return;
+        }
+
         final String number = etNumber.getText().toString();
-        final int points = Integer.parseInt(etPoints.getText().toString());
+        final int numberLen = number.length();
+        if (numberLen != 2 && numberLen != 4 && numberLen != 6) {
+            Global.showToast(getContext(), getString(R.string.error_invalid_play_number));
+            return;
+        }
+
+        // Continue adding the play
+        final int points = Integer.parseInt(pointsStr);
         final String type = mSpinnerTypes.getSelectedItem().toString();
 
         TicketPlay ticketPlay = new TicketPlay(number, points, type);
@@ -246,6 +264,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void save() {
+        btnSave.setEnabled(false);
+
         final String authHeader = User.getAuthHeader(getContext());
         final TicketBody ticketBody = new TicketBody(getLotteryIdsAsArray(), mAdapter.getPlays());
 
@@ -265,11 +285,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 } else {
                     showErrorTicketDialog(response.raw().toString());
                 }
+
+                btnSave.setEnabled(true);
             }
 
             @Override
             public void onFailure(@NonNull Call<SimpleResponse> call, @NonNull Throwable t) {
                 showErrorTicketDialog(t.getLocalizedMessage());
+
+                btnSave.setEnabled(true);
             }
         });
     }

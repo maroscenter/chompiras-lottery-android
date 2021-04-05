@@ -29,6 +29,9 @@
     <string name="selected_lotteries_label">Loterías selecciondas:\n%s</string>
     <string name="dialog_title_error">Mensaje de error</string>
     <string name="no_selected_lotteries">Loterías seleccionadas:\n-</string>
+    <!-- Validations -->
+    <string name="error_invalid_play_points">Ingrese una cantidad válida de puntos</string>
+    <string name="error_invalid_play_number">Ingrese un número válido</string>
 
     <!-- TicketsFragment -->
     <string name="fragment_tickets_title">Tickets vendidos</string>
@@ -57,4 +60,5 @@
     <string name="btn_remove_ticket_play">Eliminar jugada</string>
     <string name="btn_delete_ticket">Anular ticket</string>
     <string name="retrofit_response_not_successful">Respuesta inesperada del servidor</string>
+
 </resources>
