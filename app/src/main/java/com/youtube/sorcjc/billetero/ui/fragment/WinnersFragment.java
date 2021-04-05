@@ -28,8 +28,8 @@ import retrofit2.Response;
 
 public class WinnersFragment extends Fragment {
 
-    private NestedScrollView scrollView;
-    private ProgressBar progressBar;
+    private NestedScrollView mScrollList;
+    private ProgressBar mProgressBar;
 
     private WinnerAdapter mAdapter;
 
@@ -46,8 +46,8 @@ public class WinnersFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_winners, container, false);
 
-        scrollView = view.findViewById(R.id.scrollList);
-        progressBar = view.findViewById(R.id.progressBar);
+        mScrollList = view.findViewById(R.id.scrollList);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         setupRecyclerView(view);
 
@@ -94,9 +94,12 @@ public class WinnersFragment extends Fragment {
 
     private void displayWinners(ArrayList<Winner> winners) {
         mAdapter.setDataSet(winners);
+
+        mProgressBar.setVisibility(View.GONE);
+        mScrollList.setVisibility(View.VISIBLE);
     }
 
     private void showErrorWinnersDialog(String errorMessage) {
-        Global.showMessageDialog(getContext(), "Error inesperado", errorMessage);
+        Global.showMessageDialog(getContext(), getString(R.string.error_unexpected), errorMessage);
     }
 }

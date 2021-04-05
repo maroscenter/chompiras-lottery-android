@@ -60,5 +60,6 @@
     <string name="btn_remove_ticket_play">Eliminar jugada</string>
     <string name="btn_delete_ticket">Anular ticket</string>
     <string name="retrofit_response_not_successful">Respuesta inesperada del servidor</string>
+    <string name="error_unexpected">Ocurrió un error inesperado</string>
 
 </resources>
