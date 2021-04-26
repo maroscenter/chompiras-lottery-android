@@ -55,8 +55,9 @@
     <string name="error_fetch_winners">No se pudo cargar la lista de ganadores.</string>
 
     <!-- EarningsFragment -->
-    <string name="fragment_earnings_title">Ganancias y comisiones</string>
+    <string name="fragment_earnings_title">Balance y últimos movimientos</string>
     <string name="error_fetch_earnings">No se pudo obtener la información de ganancias</string>
+    <string name="error_fetch_balance_movements">No se pudo obtener la información de sus movimientos</string>
     <string name="already_paid">Este ticket ya está pagado</string>
     <string name="btn_remove_ticket_play">Eliminar jugada</string>
     <string name="btn_delete_ticket">Anular ticket</string>

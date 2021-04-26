@@ -45,10 +45,9 @@ public class SoldTicketsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sold_tickets, container, false);
 
         mScrollList = view.findViewById(R.id.scrollList);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         setupRecyclerView(view);
-
-        mProgressBar = view.findViewById(R.id.progressBar);
 
         return view;
     }

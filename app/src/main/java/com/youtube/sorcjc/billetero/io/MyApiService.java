@@ -5,6 +5,7 @@ import com.youtube.sorcjc.billetero.io.response.LoginResponse;
 import com.youtube.sorcjc.billetero.io.response.SimpleResponse;
 import com.youtube.sorcjc.billetero.io.response.SoldTicketsResponse;
 import com.youtube.sorcjc.billetero.io.response.TicketResponse;
+import com.youtube.sorcjc.billetero.model.BalanceMovement;
 import com.youtube.sorcjc.billetero.model.Lottery;
 import com.youtube.sorcjc.billetero.model.Ticket;
 import com.youtube.sorcjc.billetero.model.TicketBody;
@@ -85,4 +86,9 @@ public interface MyApiService {
             @Path("ticket") String ticketId
     );
 
+    @Headers("Accept: application/json")
+    @GET("balance_movements")
+    Call<ArrayList<BalanceMovement>> getBalanceMovements(
+            @Header("Authorization") String authHeader
+    );
 }
