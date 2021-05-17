@@ -3,6 +3,7 @@ package com.youtube.sorcjc.billetero.ui.fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +30,7 @@ import com.youtube.sorcjc.billetero.model.Lottery;
 import com.youtube.sorcjc.billetero.model.TicketBody;
 import com.youtube.sorcjc.billetero.model.TicketPlay;
 import com.youtube.sorcjc.billetero.model.User;
+import com.youtube.sorcjc.billetero.ui.MainActivity;
 import com.youtube.sorcjc.billetero.ui.adapter.TicketPlayAdapter;
 
 import java.util.ArrayList;
@@ -51,6 +53,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
 
     final ArrayList<Integer> mSelectedLotteries = new ArrayList<>();
+
+    private ImageButton btnSelectLotteries;
 
     // Buttons
     private ImageButton btnSave;
@@ -85,12 +89,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setupSelectLotteries(View view) {
-        ImageButton btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
+        btnSelectLotteries = view.findViewById(R.id.btnSelectLotteries);
 
         btnSelectLotteries.setOnClickListener(view1 -> {
             mSelectedLotteries.clear();
             createCheckboxesDialog();
         });
+
+        btnSelectLotteries.setEnabled(false);
     }
 
     @Override
@@ -118,7 +124,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     mLotteries = response.body();
                     if (mLotteries == null) return;
 
+                    btnSelectLotteries.setEnabled(true);
                     Log.d(TAG, "We got (" + mLotteries.size() + ") lotteries");
+                } else if (response.code() == 401) {
+                    logOut();
                 }
             }
 
@@ -127,6 +136,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Log.d(TAG, t.getLocalizedMessage());
             }
         });
+    }
+
+    private void logOut() {
+        Global.showToast(getContext(), R.string.unauthorized_response_needs_login);
+
+        MainActivity mainActivity = ((MainActivity) getActivity());
+        if (mainActivity != null) {
+            mainActivity.performLogout();
+        }
     }
 
     private void createCheckboxesDialog() {

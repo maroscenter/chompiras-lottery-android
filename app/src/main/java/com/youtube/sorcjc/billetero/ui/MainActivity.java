@@ -76,22 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.reset) {
-            Global.showConfirmationDialog(
-                    this,
-                    "Confirmar acción",
-                    "¿Realmente desea resetear su lista? Todos los tiempos vendidos serán modificados por cero.",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            resetList();
-                        }
-                    }
-            );
-
-            return true;
-
-        } else if (item.getItemId() == R.id.logout) {
+        if (item.getItemId() == R.id.logout) {
             Global.showConfirmationDialog(
                     this,
                     "Confirmar acción",
@@ -106,10 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void resetList() {
-    }
-
-    private void performLogout() {
+    public void performLogout() {
         Global.saveStringPref(this, "access_token", "");
 
         Intent intent = new Intent(this, LoginActivity.class);
