@@ -46,8 +46,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private TicketPlayAdapter mAdapter;
 
-    private AppCompatSpinner mSpinnerTypes;
-
     private ArrayList<Lottery> mLotteries = new ArrayList<>();
 
     private static final ArrayList<TicketPlay> ticketPlays = new ArrayList<>();
@@ -83,7 +81,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         setupSelectLotteries(view);
         setupRecyclerView(view);
-        populateSpinnerTypes(view);
 
         return  view;
     }
@@ -218,21 +215,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.viewLastColumn).setVisibility(View.VISIBLE);
     }
 
-    private void populateSpinnerTypes(View view) {
-        mSpinnerTypes = view.findViewById(R.id.spinnerType);
-
-        ArrayList<String> types = new ArrayList<>();
-        types.add("Quiniela");
-        types.add("Pale");
-        types.add("Tripleta");
-
-        ArrayAdapter<String> typesArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, types);
-        typesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        mSpinnerTypes.setAdapter(typesArrayAdapter);
-        mSpinnerTypes.setSelection(0);
-    }
-
     @Override
     public void onClick(View view) {
         final int clickedId = view.getId();
@@ -261,14 +243,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         final String number = etNumber.getText().toString();
         final int numberLen = number.length();
-        if (numberLen != 2 && numberLen != 4 && numberLen != 6) {
+
+        String type = "";
+        if (numberLen == 2) {
+            type = "Quiniela";
+        } else if (numberLen == 4) {
+            type = "Pale";
+        } else if (numberLen == 6) {
+            type = "Tripleta";
+        } else {
             Global.showToast(getContext(), getString(R.string.error_invalid_play_number));
             return;
         }
 
         // Continue adding the play
         final int points = Integer.parseInt(pointsStr);
-        final String type = mSpinnerTypes.getSelectedItem().toString();
 
         TicketPlay ticketPlay = new TicketPlay(number, points, type, -1);
         mAdapter.addPlay(ticketPlay);
