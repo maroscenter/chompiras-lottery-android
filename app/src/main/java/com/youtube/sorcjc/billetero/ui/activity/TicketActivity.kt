@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.view.View
 import com.youtube.sorcjc.billetero.Global
 import com.youtube.sorcjc.billetero.R
@@ -36,6 +37,17 @@ class TicketActivity : AppCompatActivity() {
         }
 
         mAdapter = TicketPlayAdapter(allowRemoveItem=false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // For the Up button to behave like the back button
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupPDFLink(ticketId: Int) {
