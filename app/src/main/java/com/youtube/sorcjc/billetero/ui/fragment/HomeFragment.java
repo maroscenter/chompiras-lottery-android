@@ -270,7 +270,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final int points = Integer.parseInt(pointsStr);
         final String type = mSpinnerTypes.getSelectedItem().toString();
 
-        TicketPlay ticketPlay = new TicketPlay(number, points, type);
+        TicketPlay ticketPlay = new TicketPlay(number, points, type, -1);
         mAdapter.addPlay(ticketPlay);
 
         clearEditTexts();
