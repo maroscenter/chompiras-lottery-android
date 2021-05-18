@@ -40,7 +40,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
 
             mContext = v.getContext();
 
-            tvId = v.findViewById(R.id.tvWinnerId);
+            tvId = v.findViewById(R.id.tvTickerId);
             tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
             tvLottery = v.findViewById(R.id.tvLottery);
             tvPoints = v.findViewById(R.id.tvPoints);
@@ -85,7 +85,7 @@ public class WinnerAdapter extends RecyclerView.Adapter<WinnerAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Winner winner = mDataSet.get(position);
 
-        holder.tvId.setText(String.format(Locale.US, "#%d", winner.getId()));
+        holder.tvId.setText(String.format(Locale.US, "Ticket %s", winner.getTicketCode()));
         holder.tvCreatedAt.setText(winner.getCreatedAt());
         holder.tvLottery.setText(winner.getLottery().getName());
 

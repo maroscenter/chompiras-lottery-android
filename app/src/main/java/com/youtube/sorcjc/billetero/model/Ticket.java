@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Ticket {
 
     private int id;
+    private String code;
 
     @SerializedName("total_points")
     private int totalPoints;
@@ -28,6 +29,10 @@ public class Ticket {
 
     public int getId() {
         return id;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public void setId(int id) {

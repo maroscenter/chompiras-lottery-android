@@ -7,10 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.youtube.sorcjc.billetero.Global;
 import com.youtube.sorcjc.billetero.R;
@@ -32,8 +30,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     // Define references to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvId, tvCreatedAt, tvLotteries;
+        public TextView tvCode, tvCreatedAt, tvLotteries;
         public ImageButton btnDetails, btnDelete;
+        public int ticketId;
 
         private final Context mContext;
 
@@ -42,7 +41,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
             mContext = v.getContext();
 
-            tvId = v.findViewById(R.id.tvWinnerId);
+            tvCode = v.findViewById(R.id.tvCode);
             tvCreatedAt = v.findViewById(R.id.tvCreatedAt);
             tvLotteries = v.findViewById(R.id.tvLotteries);
             btnDetails = v.findViewById(R.id.btnDetails);
@@ -57,13 +56,14 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
         private void startTicketActivity() {
             final Intent intent = new Intent(mContext, TicketActivity.class);
-            intent.putExtra("ticket_id", tvId.getText().toString());
+            intent.putExtra("ticket_id", ticketId);
+
             mContext.startActivity(intent);
         }
 
         private void deleteTicket(final int position, Runnable successCallback) {
             final String authHeader = User.getAuthHeader(mContext);
-            final String ticketId = tvId.getText().toString();
+            final String ticketId = tvCode.getText().toString();
 
             MyApiAdapter.getApiService().deleteTicket(authHeader, ticketId).enqueue(new Callback<SimpleResponse>() {
                 @Override
@@ -132,7 +132,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         Ticket ticket = mDataSet.get(position);
 
         // replace the contents of the view with that element
-        holder.tvId.setText(twoDigits(ticket.getId()));
+        holder.ticketId = ticket.getId();
+        holder.tvCode.setText(ticket.getCode());
         holder.tvCreatedAt.setText(ticket.getCreatedAt());
         holder.tvLotteries.setText(ticket.getLotteries());
 

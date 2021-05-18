@@ -35,7 +35,7 @@
 
     <!-- TicketsFragment -->
     <string name="fragment_tickets_title">Tickets vendidos</string>
-    <string name="ticket_header_id">ID</string>
+    <string name="ticket_header_id">#</string>
     <string name="ticket_header_created_at">Fecha y hora</string>
     <string name="ticket_header_lotteries">Loterías</string>
     <string name="ticket_header_details">Detalles</string>

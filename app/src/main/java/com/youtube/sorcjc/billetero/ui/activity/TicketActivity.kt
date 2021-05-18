@@ -31,7 +31,7 @@ class TicketActivity : AppCompatActivity() {
 
         val bundle = intent.extras
 
-        bundle?.getString("ticket_id")?.let {
+        bundle?.getInt("ticket_id")?.let {
             fetchTicketInfo(it)
         }
 
@@ -47,10 +47,12 @@ class TicketActivity : AppCompatActivity() {
         btnPDF.isEnabled = true
     }
 
-    private fun fetchTicketInfo(ticketId: String) {
+    private fun fetchTicketInfo(ticketId: Int) {
         val authHeader = User.getAuthHeader(this)
 
-        MyApiAdapter.getApiService().getTicket(authHeader, ticketId).enqueue(object : Callback<TicketResponse> {
+        val call = MyApiAdapter.getApiService().getTicket(authHeader, ticketId.toString())
+
+        call.enqueue(object : Callback<TicketResponse> {
             override fun onResponse(call: Call<TicketResponse>, response: Response<TicketResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -70,9 +72,9 @@ class TicketActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun displayTicket(ticket: Ticket) {
-        title = "Ticket #${ticket.id}"
+        title = "Ticket ${ticket.code}"
 
-        tvWinnerId.text = ticket.id.toString()
+        tvCode.text = ticket.code
         tvTicketCreatedAt.text = ticket.createdAt
         tvTicketTotal.text = "$ ${ticket.totalPoints}"
 
