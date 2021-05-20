@@ -63,9 +63,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
         private void deleteTicket(final int position, Runnable successCallback) {
             final String authHeader = User.getAuthHeader(mContext);
-            final String ticketId = tvCode.getText().toString();
+            final String ticketIdStr = String.valueOf(ticketId);
 
-            MyApiAdapter.getApiService().deleteTicket(authHeader, ticketId).enqueue(new Callback<SimpleResponse>() {
+            MyApiAdapter.getApiService().deleteTicket(authHeader, ticketIdStr).enqueue(new Callback<SimpleResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<SimpleResponse> call, @NonNull Response<SimpleResponse> response) {
                     if (response.isSuccessful()) {
